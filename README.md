@@ -1,18 +1,24 @@
 # IMPORTANT GROUP 13
 
-## Installation
+Installation
 
-clone the repo
+```sh
+git clone https://github.com/rdg11/angular-todo.git
 npm install
+```
 
-## Development
+Development
 
+```sh
 npm run server
 npm start
+```
 
-## Testing
+Testing
 
+```sh
 npm run e2e
+```
 
 # IGNORE BELOW GROUP 13
 
