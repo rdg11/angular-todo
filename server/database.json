@@ -5,14 +5,14 @@
       "label": "Use UTC date 4",
       "description": "Use UTC conversion for dates",
       "category": "bureaucracy",
-      "done": "18-01-2023"
+      "done": false
     },
     {
       "id": 4,
       "label": "Db updates",
       "description": "Update the database to contain categories independently and get them",
       "category": "bureaucracy",
-      "done": false
+      "done": "24-04-2024"
     },
     {
       "id": 5,

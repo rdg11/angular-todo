@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from 'rxjs';
-import { TodoCategory } from '../todo-category';
-import { TodoItem } from './todo-item';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Subject } from "rxjs";
+import { TodoCategory } from "../todo-category";
+import { TodoItem } from "./todo-item";
 
 @Component({
-  selector: 'app-todo-item',
-  templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.scss']
+  selector: "app-todo-item",
+  templateUrl: "./todo-item.component.html",
+  styleUrls: ["./todo-item.component.scss"],
 })
 export class TodoItemComponent implements OnInit {
   @Input() todoItem: TodoItem;
@@ -18,10 +18,9 @@ export class TodoItemComponent implements OnInit {
   public editSelectedTodo: TodoItem;
   public openAddEditModal: Subject<TodoItem> = new Subject();
 
-  constructor(private _modalService: NgbModal) { }
+  constructor(private _modalService: NgbModal) {}
 
-  public ngOnInit(): void {
-  }
+  public ngOnInit(): void {}
 
   public isCategorySelected(todoCategory: TodoCategory): boolean {
     return todoCategory && todoCategory === this.editSelectedTodo.category; // checks if the current category is selected
@@ -29,42 +28,39 @@ export class TodoItemComponent implements OnInit {
 
   public openDeleteTodoModal(content: any, todoId: number): void {
     this._modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then( // open confirmation for "delete" todo
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        // open confirmation for "delete" todo
         () => this.deleteTodoItem.next(todoId) // calling the callback which actually should perform the removal
       );
   }
 
   public openCompleteTodoModal(content: any, todoItem: TodoItem): void {
     this._modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result
-      .then(
-        () => {
-          let updatedTodoItem = JSON.parse(JSON.stringify(todoItem)); // creating the deep copy for the todo item to not harm the existing one
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(() => {
+        let updatedTodoItem = JSON.parse(JSON.stringify(todoItem)); // creating the deep copy for the todo item to not harm the existing one
 
-          updatedTodoItem.completedOn = new Date(); // set the completed date as current // TODO: may need the UTC conversion
-          updatedTodoItem.isCompleted = true;
+        updatedTodoItem.completedOn = new Date(); // set the completed date as current // TODO: may need the UTC conversion
+        updatedTodoItem.isCompleted = true;
 
-          this.editTodoItem.next(updatedTodoItem); // call the edit todo performer callback 
-        }
-      );
+        this.editTodoItem.next(updatedTodoItem); // call the edit todo performer callback
+      });
   }
 
   public openResetCompleteTodoModal(content: any, todoItem: TodoItem): void {
-    this._modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result
-      .then(
-        () => {
-          let updatedTodoItem = JSON.parse(JSON.stringify(todoItem)); // creating the deep copy for the todo item to not harm the existing one
-
-          updatedTodoItem.completedOn = null;
-          updatedTodoItem.isCompleted = false;
-
-          this.editTodoItem.next(updatedTodoItem); // call the edit todo performer callback 
-        }
-      );
+    // COMMENTED OUT FOR TEST FAIL
+    // this._modalService
+    //   .open(content, { ariaLabelledBy: 'modal-basic-title' })
+    //   .result
+    //   .then(
+    //     () => {
+    //       let updatedTodoItem = JSON.parse(JSON.stringify(todoItem)); // creating the deep copy for the todo item to not harm the existing one
+    //       updatedTodoItem.completedOn = null;
+    //       updatedTodoItem.isCompleted = false;
+    //       this.editTodoItem.next(updatedTodoItem); // call the edit todo performer callback
+    //     }
+    //   );
   }
 
   public openEditTodoModal(todoItem: TodoItem): void {

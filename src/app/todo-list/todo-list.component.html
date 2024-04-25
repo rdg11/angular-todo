@@ -5,6 +5,7 @@
       <div class="input-group mb-3">
         <div class="position-relative">
           <input
+            data-cy="filter-input"
             type="text"
             class="form-control p-2"
             placeholder="Filter todo"
@@ -19,6 +20,7 @@
         </div>
 
         <button
+          data-cy="filter-type-dropdown"
           class="btn btn-outline-secondary dropdown-toggle"
           type="button"
           data-bs-toggle="dropdown"
@@ -29,6 +31,7 @@
         <ul class="dropdown-menu dropdown-menu-end">
           <li>
             <a
+              data-cy="filter-type"
               class="dropdown-item"
               href="#"
               *ngFor="let filterType of filterTypes"
